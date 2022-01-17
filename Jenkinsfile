@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Checkout Source') {
             steps {
-                git url:'https://gitlab.com/oyedelemichael1/simple-app.git', branch:'master'
+                
+                git credentialsId: '2016a166-9bb8-44e9-aa9d-811a86ef1519', url: 'git@gitlab.com:oyedelemichael1/simple-app.git', branch:'master'
             }
         }
         stage("Build image") {
