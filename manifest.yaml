@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-app
+  labels:
+    app: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dev
+
+  template:
+    metadata: 
+      name: simple-app
+      labels:
+        app: dev
+    spec:
+      containers:
+      - image: oyedelemichael1/simple-app:latest
+        name: simple-app-image
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: dev
+  name: simple-service
+spec:
+  type: NodePort
+  ports:
+  - nodePort: 31000
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  selector:
+    app: dev
+  
