@@ -17,8 +17,8 @@ pipeline {
                     when{ not { anyOf { branch 'master' } } }
                         steps {
                             script {
-                                myapp = docker.build("oyedelemichael1/simple-app-dev:${env.BUILD_ID}")
-                                env.image = "oyedelemichael1/simple-app-dev:latest"
+                                myapp = docker.build("oyedelemichael1/simple-app-development:${env.BUILD_ID}")
+                                env.image = "oyedelemichael1/simple-app-development:latest"
                             }
                         }
 
@@ -27,8 +27,8 @@ pipeline {
                     when{branch 'master'}
                         steps {
                             script {
-                                myapp = docker.build("oyedelemichael1/simple-app-prod:${env.BUILD_ID}")
-                                env.image = "oyedelemichael1/simple-app-prod:latest"
+                                myapp = docker.build("oyedelemichael1/simple-app-production:${env.BUILD_ID}")
+                                env.image = "oyedelemichael1/simple-app-production:latest"
                             }
                         }
 
