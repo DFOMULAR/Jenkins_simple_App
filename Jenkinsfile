@@ -18,6 +18,7 @@ pipeline {
                         steps {
                             script {
                                 myapp = docker.build("oyedelemichael1/simple-app-dev:${env.BUILD_ID}")
+                                env.image = "oyedelemichael1/simple-app-dev:latest"
                             }
                         }
 
@@ -27,6 +28,7 @@ pipeline {
                         steps {
                             script {
                                 myapp = docker.build("oyedelemichael1/simple-app-prod:${env.BUILD_ID}")
+                                env.image = "oyedelemichael1/simple-app-prod:latest"
                             }
                         }
 
@@ -52,7 +54,7 @@ pipeline {
                         steps {
                             echo 'Deploying...now'
                             sh "sed -i 's/__NAMESPACE__/dev/g' manifest.yaml"
-                            sh "sed -i 's/__IMAGE__/${myapp}/g' manifest.yaml"
+                            sh "sed -i 's/__IMAGE__/${image}/g' manifest.yaml"
                             script{
                                 kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
                             }
@@ -64,7 +66,7 @@ pipeline {
                          steps {
                             echo 'Deploying...now'
                             sh "sed -i 's/__NAMESPACE__/prod/g' manifest.yaml"
-                            sh "sed -i 's/__IMAGE__/${myapp}/g' manifest.yaml"
+                            sh "sed -i 's/__IMAGE__/${image}/g' manifest.yaml"
                             script{
                                 kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
                             }
