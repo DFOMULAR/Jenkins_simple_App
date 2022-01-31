@@ -8,7 +8,7 @@ pipeline {
                 // git credentialsId: '2016a166-9bb8-44e9-aa9d-811a86ef1519', url: 'git@gitlab.com:oyedelemichael1/simple-app.git', branch:'master'
                 git credentialsId: '2016a166-9bb8-44e9-aa9d-811a86ef1519', url: 'git@gitlab.com:oyedelemichael1/simple-app.git', branch: env.BRANCH_NAME
 
-                echo "pulled "env.BRANCH_NAME
+                echo "pulled ${env.BRANCH_NAME}"
             }
         }
         stage("Build image") {
@@ -52,7 +52,7 @@ pipeline {
                         steps {
                             echo 'Deploying...now'
                             sh "sed -i 's/__NAMESPACE__/dev/g' manifest.yaml"
-                            sh "sed -i 's/__IMAGE__/'"${myapp}"'/g' manifest.yaml"
+                            sh "sed -i 's/__IMAGE__/${myapp}/g' manifest.yaml"
                             script{
                                 kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
                             }
@@ -64,7 +64,7 @@ pipeline {
                          steps {
                             echo 'Deploying...now'
                             sh "sed -i 's/__NAMESPACE__/prod/g' manifest.yaml"
-                            sh "sed -i 's/__IMAGE__/'"${myapp}"'/g' manifest.yaml"
+                            sh "sed -i 's/__IMAGE__/${myapp}/g' manifest.yaml"
                             script{
                                 kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
                             }
