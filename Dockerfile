@@ -8,5 +8,5 @@ COPY package*.json ./
 # Bundle app source
 COPY . .
 
-EXPOSE 300
+EXPOSE 3000
 CMD [ "node", "index.js" ]
