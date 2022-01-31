@@ -4,6 +4,7 @@ metadata:
   name: simple-app
   labels:
     app: dev
+  namespace: __NAMESPACE__
 spec:
   replicas: 1
   selector:
@@ -17,7 +18,7 @@ spec:
         app: dev
     spec:
       containers:
-      - image: oyedelemichael1/simple-app:latest
+      - image: __IMAGE__   #oyedelemichael1/simple-app:latest
         name: simple-app-image
 
 ---
@@ -28,6 +29,7 @@ metadata:
   labels:
     app: dev
   name: simple-service
+  namespace: __NAMESPACE__
 spec:
   type: NodePort
   ports:
