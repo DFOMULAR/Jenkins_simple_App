@@ -51,8 +51,8 @@ pipeline {
                     when{ not { anyOf { branch 'master' } } }
                         steps {
                             echo 'Deploying...now'
-                            sh 'sed -i 's/__NAMESPACE__/'dev'/g' manifest.yaml'
-                            sh 'sed -i 's/__IMAGE__/'"${myapp}"'/g' manifest.yaml'
+                            sed -i 's/__NAMESPACE__/'dev'/g' manifest.yaml
+                            sed -i 's/__IMAGE__/'"${myapp}"'/g' manifest.yaml
                             script{
                                 kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
                             }
@@ -63,8 +63,8 @@ pipeline {
                     when{branch 'master'}
                          steps {
                             echo 'Deploying...now'
-                            sh 'sed -i 's/__NAMESPACE__/'prod'/g' manifest.yaml'
-                            sh 'sed -i 's/__IMAGE__/'"${myapp}"'/g' manifest.yaml'
+                            sed -i 's/__NAMESPACE__/'prod'/g' manifest.yaml
+                            sed -i 's/__IMAGE__/'"${myapp}"'/g' manifest.yaml
                             script{
                                 kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
                             }
