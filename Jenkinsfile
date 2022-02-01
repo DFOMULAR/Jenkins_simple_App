@@ -26,16 +26,16 @@ pipeline {
         stage('add .env file'){
             steps{
                 script{
-                    withCredentials([file(credentialsId: 'env', variable: 'pipeline_env')]) {
+                    withCredentials([file(credentialsId: 'env', variable: 'pipeline_env')]){load "$pipeline_env"} 
                     // some block
-                    {load "$pipeline_env"}
+                    
 
                     echo "start of env file"
                     echo "${pipeline_env}"
                     echo "end!!"
                     // sh 'cp ${.env} .env'
                     sh 'ls'
-                    }
+                    
 
                 }
             }
