@@ -13,7 +13,7 @@ pipeline {
         }
 
         stage('install dependensies'){
-            step{
+            steps{
                 script{
                     sh 'npm install'
                 }
@@ -21,14 +21,14 @@ pipeline {
             
         }
         stage('run tests'){
-            step{
+            steps{
                 script{
                      sh 'npm test'
                 }
             }            
         }
         stage('add .env file'){
-            step{
+            steps{
                 script{
                     withCredentials([file(credentialsId: 'env', variable: '.env')]) {
                     // some block
