@@ -13,16 +13,30 @@ pipeline {
         }
 
         stage('install dependensies'){
-            sh 'npm install'
+            step{
+                script{
+                    sh 'npm install'
+                }
+            }
+            
         }
         stage('run tests'){
-            sh 'npm test'
+            step{
+                script{
+                     sh 'npm test'
+                }
+            }            
         }
         stage('add .env file'){
-            withCredentials([file(credentialsId: 'env', variable: '.env')]) {
-              // some block
-              sh 'cp .env .env'
-              sh 'ls'
+            step{
+                script{
+                    withCredentials([file(credentialsId: 'env', variable: '.env')]) {
+                    // some block
+                    sh 'cp .env .env'
+                    sh 'ls'
+                    }
+
+                }
             }
         }
         stage("Build image") {
