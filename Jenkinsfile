@@ -12,7 +12,7 @@ pipeline {
             }
         }
 
-        stage('install dependensies'){
+        /*stage('install dependensies'){
             steps{
                 script{
                     nodejs('node'){
@@ -22,15 +22,16 @@ pipeline {
                 }
             }
             
-        }
+        }*/
         stage('add .env file'){
             steps{
                 script{
-                    withCredentials([file(credentialsId: 'env', variable: 'pipeline_env')]){load "$pipeline_env"} 
+                    withCredentials([file(credentialsId: 'env', variable: 'pipeline_env')]){load '$pipeline_env'} 
                     // some block
                     
 
                     echo "start of env file"
+                    echo "">>.env
                     sh 'cp ${pipeline_env} .env'
                     echo "end!!"
                     // sh 'cp ${.env} .env'
