@@ -31,7 +31,7 @@ pipeline {
                     
 
                     echo "start of env file"
-                    echo "${pipeline_env}"
+                    sh 'cp ${pipeline_env} .env'
                     echo "end!!"
                     // sh 'cp ${.env} .env'
                     sh 'ls'
