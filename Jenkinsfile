@@ -11,6 +11,20 @@ pipeline {
                 echo "pulled ${env.BRANCH_NAME}"
             }
         }
+
+        stage('install dependensies'){
+            sh 'npm install'
+        }
+        stage('run tests'){
+            sh 'npm test'
+        }
+        stage('add .env file'){
+            withCredentials([file(credentialsId: 'env', variable: '.env')]) {
+              // some block
+              sh 'cp .env .env'
+              sh 'ls'
+            }
+        }
         stage("Build image") {
             parallel{
                 stage("build dev image"){
