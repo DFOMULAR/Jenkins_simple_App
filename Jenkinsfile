@@ -15,7 +15,7 @@ pipeline {
             }
         }
 
-        /*
+        
        
         stage('install dependensies'){
             steps{
@@ -27,7 +27,7 @@ pipeline {
                 }
             }
             
-        }*/
+        }
        
         stage('add .env file'){
             steps{
