@@ -41,7 +41,7 @@ pipeline {
                     sh 'cp ${PIPELINE_ENV} .env'
                     echo "end!!"
                     // sh 'cp ${.env} .env'
-                    sh 'ls'
+                    sh 'ls -a'
                     
 
                 }
