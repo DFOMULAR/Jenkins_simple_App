@@ -1,6 +1,9 @@
 pipeline {
     agent any
 
+        environment {
+        PIPELINE_ENV = credentials('env')
+        }
     stages {
         stage('Checkout Source') {
             steps {
@@ -25,9 +28,7 @@ pipeline {
             }
             
         }*/
-        environment {
-        PIPELINE_ENV = credentials('env')
-        }
+       
         stage('add .env file'){
             steps{
                 script{
