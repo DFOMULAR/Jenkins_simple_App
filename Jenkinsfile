@@ -23,6 +23,22 @@ pipeline {
             }
             
         }
+        stage('add .env file'){
+            steps{
+                script{
+                    withCredentials([file(credentialsId: 'env', variable: '.env')]) {
+                    // some block
+
+                    echo "start of env file"
+                    echo "${env}"
+                    echo "end!!"
+                    // sh 'cp ${.env} .env'
+                    sh 'ls'
+                    }
+
+                }
+            }
+        }
         stage('run tests'){
             steps{
                 script{
@@ -31,18 +47,6 @@ pipeline {
                     }
                 }
             }            
-        }
-        stage('add .env file'){
-            steps{
-                script{
-                    withCredentials([file(credentialsId: 'env', variable: '.env')]) {
-                    // some block
-                    sh 'cp .env .env'
-                    sh 'ls'
-                    }
-
-                }
-            }
         }
         stage("Build image") {
             parallel{
