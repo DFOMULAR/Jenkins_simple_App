@@ -29,27 +29,27 @@ pipeline {
             
         }
        
-        stage('add .env file'){
-            steps{
-                script{
-                   // withCredentials([file(credentialsId: 'env', variable: 'pipeline_env')]){load '$pipeline_env'} 
-                    // some block
+//         stage('add .env file'){
+//             steps{
+//                 script{
+//                    // withCredentials([file(credentialsId: 'env', variable: 'pipeline_env')]){load '$pipeline_env'} 
+//                     // some block
                     
 
-                    sh 'ls -a'
-                    echo "start of env file"
-                    sh 'echo " ">>.env'
-                   // sh 'cp ${PIPELINE_ENV} .env'
-                    echo "end!!"
+//                     sh 'ls -a'
+//                     echo "start of env file"
+//                     sh 'echo " ">>.env'
+//                    // sh 'cp ${PIPELINE_ENV} .env'
+//                     echo "end!!"
 
-                    sh 'cat .env'
-                    // sh 'cp ${.env} .env'
-                    sh 'ls -a'
+//                     sh 'cat .env'
+//                     // sh 'cp ${.env} .env'
+//                     sh 'ls -a'
                     
 
-                }
-            }
-        }
+//                 }
+//             }
+//         }
         stage('run tests'){
             steps{
                 script{
