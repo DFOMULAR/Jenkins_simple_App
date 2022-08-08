@@ -72,7 +72,7 @@ pipeline {
 
                 }
                 stage("build prod image"){
-                    when{branch 'main'}
+                    when{branch 'master'}
                         steps {
                             script {
                                 myapp = docker.build("1234folarin574/simple-app-production:${env.BUILD_ID}")
@@ -98,7 +98,7 @@ pipeline {
         stage('Deploy to kubernetes') {
             parallel{
                 stage("deploy dev"){
-                    when{ not { anyOf { branch 'mainr' } } }
+                    when{ not { anyOf { branch 'master' } } }
                         steps {
                             echo 'Deploying...now'
                             sh "sed -i 's~__NAMESPACE__~dev~g' manifest.yaml"
@@ -110,7 +110,7 @@ pipeline {
 
                 }
                 stage("deploy prod"){
-                    when{branch 'main'}
+                    when{branch 'master'}
                          steps {
                             echo 'Deploying...now'
                             sh "sed -i 's~__NAMESPACE__~prod~g' manifest.yaml"
