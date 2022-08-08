@@ -6,7 +6,7 @@ pipeline {
             steps {
                 
                 // git credentialsId: '2016a166-9bb8-44e9-aa9d-811a86ef1519', url: 'git@gitlab.com:oyedelemichael1/simple-app.git', branch:'master'
-                git credentialsId: '2016a166-9bb8-44e9-aa9d-811a86ef1519', url: 'git@gitlab.com:oyedelemichael1/simple-app.git', branch: "${env.BRANCH_NAME}"
+                git credentialsId: 'git', url: 'git@github.com/DFOMULAR/Jenkins_simple_App.git', branch: "${env.BRANCH_NAME}"
 
                 echo "pulled ${env.BRANCH_NAME}"
             }
@@ -17,8 +17,8 @@ pipeline {
                     when{ not { anyOf { branch 'master' } } }
                         steps {
                             script {
-                                myapp = docker.build("oyedelemichael1/simple-app-development:${env.BUILD_ID}")
-                                env.image = "oyedelemichael1/simple-app-development:latest"
+                                myapp = docker.build("1234folarin574/simple-app-development:${env.BUILD_ID}")
+                                env.image = "1234folarin574/simple-app-development:latest"
                             }
                         }
 
@@ -27,8 +27,8 @@ pipeline {
                     when{branch 'master'}
                         steps {
                             script {
-                                myapp = docker.build("oyedelemichael1/simple-app-production:${env.BUILD_ID}")
-                                env.image = "oyedelemichael1/simple-app-production:latest"
+                                myapp = docker.build("1234folarin574/simple-app-production:${env.BUILD_ID}")
+                                env.image = "1234folarin574/simple-app-production:latest"
                             }
                         }
 
@@ -56,7 +56,7 @@ pipeline {
                             sh "sed -i 's~__NAMESPACE__~dev~g' manifest.yaml"
                             sh "sed -i 's~__IMAGE__~${image}~g' manifest.yaml"
                             script{
-                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
+                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "kubernetes")
                             }
                         }
 
@@ -68,7 +68,7 @@ pipeline {
                             sh "sed -i 's~__NAMESPACE__~prod~g' manifest.yaml"
                             sh "sed -i 's~__IMAGE__~${image}~g' manifest.yaml"
                             script{
-                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "k8s")
+                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "kubernetes")
                             }
                         }
 
