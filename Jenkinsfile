@@ -57,7 +57,7 @@ pipeline {
                             sh "sed -i 's~__NAMESPACE__~dev~g' manifest.yaml"
                             sh "sed -i 's~__IMAGE__~${image}~g' manifest.yaml"
                             script{
-                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "kubernetes")
+                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "Kubernetes")
                             }
                         }
 
@@ -69,7 +69,7 @@ pipeline {
                             sh "sed -i 's~__NAMESPACE__~prod~g' manifest.yaml"
                             sh "sed -i 's~__IMAGE__~${image}~g' manifest.yaml"
                             script{
-                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "kubernetes")
+                                kubernetesDeploy(configs: "manifest.yaml", kubeconfigId: "Kubernetes")
                             }
                         }
 
